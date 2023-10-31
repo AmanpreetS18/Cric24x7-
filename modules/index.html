@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cric24x7 - Your Cricket Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="main1.css">
+    <style>
+        /* Additions and improvements to your CSS */
+        body {
+            background: linear-gradient(to right, #00458B, #001F3E);
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #00458B, #001F3E);
+            color: #fff;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 16px;
+            margin-right: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: scale(1.2);
+        }
+
+        .maincont {
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container1, .container2, .container3 {
+            margin-bottom: 20px;
+        }
+       
+        .container3{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            
+        }
+
+        .card {
+            background-color: #fff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00458b;
+        }
+
+        .card-text {
+            color: #555;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline-success {
+            color: #00458b;
+            border-color: #00458b;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #0770d8;
+            color: #fff;
+        }
+
+        .table {
+            table-layout: scroll;
+        }
+
+        /* Customize your CSS here for cricket-themed design */
+        #news1, #news2, #news3 {
+            height: 200px;
+            width: 400px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="data-container"></div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cric24x7</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="teams.html">Teams</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Records
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="mostruns.html">Most Runs</a></li>
+                            <li><a class="dropdown-item" href="mostwkts.html">Most Wickets</a></li>
+                           
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            ICC Rankings
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="battersranks.html">Batters</a></li>
+                            <li><a class="dropdown-item" href="bowlersranks.html">Bowlers</a></li>
+                            <li><a class="dropdown-item" href="arranks.html">All-rounders</a></li>
+                            <li><a class="dropdown-item" href="teamsranks.html">Teams</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="maincont">
+
+        <div class="leftcontainer">
+            <!-- CONTAINER1 -->
+            <div class="container1">
+                
+                <div class="card" style="width: 600px; height: 300px; overflow:hidden;">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <table class="table" style="width: 100%; height: 100%;">
+                            <thead>
+                                <tr>
+                                    
+                                    <th scope="col" style="width: 33%;">Name</th>
+                                    <th scope="col" style="width: 33%;">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  
+                                    <td id="name1"></td>
+                                    <td id="score1"></td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td id="name2"></td>
+                                    <td id="score2"></td>
+                                </tr>
+                                <tr id="mstatus">
+                                    <!-- Content for the mstatus row -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                
+                
+            
+            </div>
+            <!-- CONTAINER2 -->
+            <div class="container2">
+                
+                <div class="card" style="width: 600px; height: 300px; overflow:hidden;">
+                    <div class="card-body">
+                        <h5 class="card-title" id="sccard2"></h5>
+                        <table class="table" style="width: 100%; height: 100%;">
+                            <thead>
+                                <tr>
+                                    
+                                    <th scope="col" style="width: 33%;">Name</th>
+                                    <th scope="col" style="width: 33%;">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  
+                                    <td id="name12"></td>
+                                    <td id="score12"></td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td id="name22"></td>
+                                    <td id="score22"></td>
+                                </tr>
+                                <tr id="mstatus2">
+                                    <!-- Content for the mstatus row -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            
+            </div>
+            <!-- CONTAINER3 -->
+            <div class="container3">
+                        <div class="card">
+                            
+                            <div class="card-body" id="news1">
+                                
+                                <h5 class="card-title">Cricket News</h5>
+                                <p id="news-title0"></p>
+                                <p id="news-intro0"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body" id="news2">
+                                <h5 class="card-title">Cricket News</h5>
+                                <p id="news-title1"></p>
+                                <p id="news-intro1"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body" id="news3">
+                                <h5 class="card-title">Cricket News</h5>
+                                <p id="news-title2"></p>
+                                <p id="news-intro2"></p>
+                            </div>
+                        </div>
+                     <!--   
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Cricket News</h5>
+                                <p id="news-title3"></p>
+                                <p id="news-intro3"></p>
+                            </div>
+                        </div>
+                       
+
+                        <div class="arrow-container">
+                            <div id="left-arrow" class="arrow">&lt;</div>
+                            <div class="scroll-container">
+                                <div class="scroll-content" id="scroll-content">
+                                    <div class="card">Card 1</div>
+                                    <div class="card">Card 2</div>
+                                    <div class="card">Card 3</div>
+                                    <div class="card">Card 4</div>
+                                    <div class="card">Card 5</div>
+                                    <div class="card">Card 6</div>
+                                </div>
+                            </div>
+                            <div id="right-arrow" class="arrow">&gt;</div>
+                        </div>
+
+                            checking-->
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Right container -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Contact Us</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Visit Our official Social Media Handles</h6>
+            <p class="card-text">
+                <!-- Add featured content here -->
+                <a href="https://www.linkedin.com/in/amanpreet-singh-6571b124a/"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/its_singh_aman1/"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" target="_blank">Instagram</a>
+                <a href="https://github.com/AmanpreetS18"  class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" target="_blank">GitHub</a>
+            </p>
+        </div>
+    </div>
+    
+   <script>
+    const url1 = 'https://cricbuzz-cricket.p.rapidapi.com/news/v1/index';
+const options1 = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'fd70c45051mshe56de3013aead33p144409jsn5428019da911',
+		'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com'
+	}
+};
+ fetch(url1,options1).then(response=>{
+   return response.json(); 
+ }).then(data=>{
+    //console.log(data.storyList[0].story);
+    //console.log(data.storyList[0].story.hline);
+    let head0=data.storyList[0].story.hline;
+    let desc0=data.storyList[0].story.intro;
+    const ntitle0= document.querySelector('#news-title0');
+    ntitle0.innerHTML=head0;
+    const ndes0= document.querySelector('#news-intro0');
+    ndes0.innerHTML=desc0;
+
+    let head1=data.storyList[2].story.hline;
+    let desc1=data.storyList[2].story.intro;
+    const ntitle1= document.querySelector('#news-title1');
+    ntitle1.innerHTML=head1;
+    const ndes1= document.querySelector('#news-intro1');
+    ndes1.innerHTML=desc1;
+
+    let head2=data.storyList[3].story.hline;
+    let desc2=data.storyList[3].story.intro;
+    const ntitle2= document.querySelector('#news-title2');
+    ntitle2.innerHTML=head2;
+    const ndes2= document.querySelector('#news-intro2');
+    ndes2.innerHTML=desc2;
+
+ });
+   </script>
+    <script src="livescore.js">
+        
+    </script>
+    <script src="news.js"></script>
+
+</body>
+</html>

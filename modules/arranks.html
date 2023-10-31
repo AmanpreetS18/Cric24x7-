@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICC Cricket Rankings</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<style>
+    header {
+        display: flex;
+        justify-content: space-between;
+        background-color:#00458B;
+    }
+
+    .icclogo {
+        display: inline;
+        margin-top:5px;
+    }
+
+    h1 {
+        float: right;
+        margin: auto;
+        color:white;
+    }
+
+    .button {
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    /* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Style table header */
+table th {
+    background-color: #343a40; /* Header background color */
+    color: #ffffff; /* Header text color */
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style table rows */
+table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+table tr:hover {
+    background-color: #da6159; /* Hovered row background color */
+}
+
+/* Style table cells */
+table td {
+    padding: 10px;
+    border: 1px solid #dee2e6; /* Cell border color */
+}
+
+/* Style buttons */
+.button {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Style buttons individually */
+.btn-success {
+    background-color: #df4b37; /* Green color for "Batters" button */
+}
+
+
+.btn {
+    color: #fff;
+    margin-right: 10px;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+</style>
+
+<body>
+    <header>
+        <img class="icclogo"
+            src="https://www.icc-cricket.com/resources/icc-prod/v2.5.0/i/elements/android-chrome-96x96.png"
+            alt="icclogo">
+        <h1>ICC Cricket Rankings - Top 10 All-Rounders</h1>
+    </header>
+    <div class="button">
+        <button type="button" id="button1" class="btn btn-success">TEST</button>
+        <button type="button" id="button2" class="btn btn-success">ODI</button>
+        <button type="button" id="button3" class="btn btn-success">T20</button>
+    </div>
+    <div id="table-container" >
+        <table class="table">
+            <thead >
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Rating</th>
+                    <th>Points</th>
+                    <th>Average</th>
+                </tr>
+            </thead>
+            <tbody id="rankings-table-body">
+                <!-- Table rows will be dynamically added here using JavaScript -->
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const tableContainer = document.getElementById("table-container");
+        const button1 = document.getElementById("button1");
+        const button2 = document.getElementById("button2");
+        const button3 = document.getElementById("button3");
+
+        function fetchAndDisplayData(apiUrl) {
+            fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com',
+                    'X-RapidAPI-Key': 'fd70c45051mshe56de3013aead33p144409jsn5428019da911' 
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const table = document.createElement("table");
+                    const headers = Object.keys(data.rank[0]);
+
+                    const headerRow = document.createElement("tr");
+                    headers.forEach(header => {
+                        const th = document.createElement("th");
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+                    table.appendChild(headerRow);
+
+                    data.rank.forEach(item => {
+                        const row = document.createElement("tr");
+                        headers.forEach(header => {
+                            const cell = document.createElement("td");
+                            cell.textContent = item[header];
+                            row.appendChild(cell);
+                        });
+                        table.appendChild(row);
+                    });
+
+                    tableContainer.innerHTML = "";
+                    tableContainer.appendChild(table);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+        button1.addEventListener("click", () => {
+            fetchAndDisplayData("https://cricbuzz-cricket.p.rapidapi.com/stats/v1/rankings/allrounders?formatType=test");
+        });
+
+        button2.addEventListener("click", () => {
+            fetchAndDisplayData("https://cricbuzz-cricket.p.rapidapi.com/stats/v1/rankings/allrounders?formatType=odi");
+        });
+
+        button3.addEventListener("click", () => {
+            fetchAndDisplayData("https://cricbuzz-cricket.p.rapidapi.com/stats/v1/rankings/allrounders?formatType=t20");
+        });
+    </script>
+</body>
+
+</html>

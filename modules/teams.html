@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICC Cricket Rankings</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<style>
+    body{
+        background-color:rgb(255, 255, 255);
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        background-color: #00458B;
+    }
+
+    .icclogo {
+        display: inline;
+        margin-top: 5px;
+    }
+
+    h1 {
+    
+        margin: auto;
+        color: white;
+    }
+
+    .button {
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Style the table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    /* Style table header */
+    table th {
+        background-color: #343a40;
+        /* Header background color */
+        color: #ffffff;
+        /* Header text color */
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Style table rows */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+        /* Alternate row background color */
+    }
+
+    table tr:hover {
+        background-color: #da6159;
+        /* Hovered row background color */
+    }
+
+    /* Style table cells */
+    table td {
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        /* Cell border color */
+    }
+
+    /* Style buttons */
+    .button {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Style buttons individually */
+    .btn-success {
+        background-color: #00458B;
+        /* Green color for "Batters" button */
+    }
+
+
+
+    .btn {
+        color: #fff;
+        margin-right: 10px;
+        border: none;
+    }
+
+    .btn:hover {
+        opacity: 0.8;
+
+    }
+
+    #teamList {
+        display: flex;
+        justify-content:center;
+        margin: 20px;
+        
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+        /* Hide both lists initially */
+    }
+
+    ul#international-teams-list {
+        background-color: #ffffff;
+        padding: 10px;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        width: 45%;
+        /* Adjust the width as needed */
+    }
+
+    ul#associate-teams-list {
+        background-color: #ffffff;
+        padding: 10px;
+        border: 1px solid #cc3333;
+        border-radius: 5px;
+        width: 45%;
+        color:#ff0000;
+        /* Adjust the width as needed */
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+</style>
+<STYLE> <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        background: linear-gradient(to right, #00458B, #001F3E);
+        padding: 20px;
+        color: white;
+    }
+
+    .icclogo {
+        display: inline;
+        margin-top: 5px;
+    }
+
+    h1 {
+        float: right;
+        margin: auto;
+        font-size: 28px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .button {
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .table-container {
+        margin: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #da6159;
+    }
+
+    .btn-success {
+        background-color: #df4b37;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .btn-success:hover {
+        background-color: #b23826;
+    }
+</style></STYLE>
+<body>
+    <header>
+        <img class="icclogo"
+            src="https://www.icc-cricket.com/resources/icc-prod/v2.5.0/i/elements/android-chrome-96x96.png"
+            alt="icclogo">
+        <h1>Teams List</h1>
+    </header>
+    <div class="button">
+        <button type="button" id="button1" class="btn btn-success">Test nations</button>
+        <button type="button" id="button2" class="btn btn-success">Associate nations</button>
+
+    </div>
+    <div id="teamList"> <!-- Add this div to display the list -->
+        <ul id="international-teams-list"></ul>
+        <ul id="associate-teams-list"></ul>
+    </div>
+
+    <script>
+        const url = 'https://cricbuzz-cricket.p.rapidapi.com/teams/v1/international';
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'fd70c45051mshe56de3013aead33p144409jsn5428019da911',
+                'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com'
+            }
+        };
+        fetch(url, options).then(res => {
+            return res.json();
+        }).then(data => {
+            const button1 = document.getElementById('button1');
+            const button2 = document.getElementById('button2');
+            const internationalList = document.getElementById('international-teams-list');
+            const associateList = document.getElementById('associate-teams-list');
+
+            button1.addEventListener('click', function () {
+                toggleList(internationalList);
+                displayInternationalTeams()
+            });
+
+            button2.addEventListener('click', function () {
+                toggleList(associateList);
+                displayAssociateTeams()
+            });
+
+            function toggleList(list) {
+                // Hide both lists initially
+                internationalList.style.display = 'none';
+                associateList.style.display = 'none';
+
+                // Show the selected list
+                list.style.display = 'block';
+
+            }
+
+
+
+            function displayInternationalTeams() {
+                const internationalList = document.getElementById('international-teams-list');
+                internationalList.innerHTML = ''; // Clear previous list
+
+                data.list.forEach(function (item) {
+                    if (item.teamId && item.teamId <= 13) { // Check for international teams
+                        const li = document.createElement('li');
+                        li.textContent = item.teamName;
+                        internationalList.appendChild(li);
+
+                        const lineBreak = document.createElement('br');
+                        internationalList.appendChild(lineBreak); // Add a line break
+                    }
+                });
+            }
+
+            function displayAssociateTeams() {
+                const associateList = document.getElementById('associate-teams-list');
+                associateList.innerHTML = ''; // Clear previous list
+
+                data.list.forEach(function (item) {
+                    if (item.teamId && item.teamId >= 71) { // Check for associate teams
+                        const li = document.createElement('li');
+                        li.textContent = item.teamName;
+                        associateList.appendChild(li);
+
+                        const lineBreak = document.createElement('br');
+                        associateList.appendChild(lineBreak); // Add a line break
+                    }
+                });
+            }
+
+        })
+    </script>
+</body>
+
+</html>

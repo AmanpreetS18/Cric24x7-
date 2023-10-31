@@ -1,0 +1,27 @@
+.card {
+    margin:auto;
+}
+.leftcontainer{
+  ] 
+    width: 70%;
+}
+.rightcontainer{
+   
+    width:30%;
+    
+}
+.maincont{
+    display:flex;
+    justify-content:space-around;
+}
+.container2{
+    margin-top: 2rem;
+}
+.container1{
+
+    margin-top: 2rem;
+}
+.container3
+{
+    margin-top:2rem;
+}
